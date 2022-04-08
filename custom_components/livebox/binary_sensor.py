@@ -64,10 +64,10 @@ class WanStatus(CoordinatorEntity, BinarySensorEntity):
         }
         cwired = self.coordinator.data.get("count_wired_devices")
         if cwired > 0:
-            _attributs.update({"wired clients": cwired})
+            _attributs["wired clients"] = cwired
         cwireless = self.coordinator.data.get("count_wireless_devices")
         if cwireless > 0:
-            _attributs.update({"wireless clients": cwireless})
+            _attributs["wireless clients"] = cwireless
 
         return _attributs
 
