@@ -37,7 +37,7 @@ class LiveboxDeviceScannerEntity(CoordinatorEntity, ScannerEntity):
         self.key = key
         self._device = self.coordinator.data.get("devices", {}).get(key, {})
         self._timeout_tracking = timeout
-        self._old_status = datetime.today()
+        self._old_status = datetime.now()
 
     @property
     def name(self):
@@ -58,10 +58,11 @@ class LiveboxDeviceScannerEntity(CoordinatorEntity, ScannerEntity):
             .get("Active")
         )
         if status is True:
-            self._old_status = datetime.today() + timedelta(
+            self._old_status = datetime.now() + timedelta(
                 seconds=self._timeout_tracking
             )
-        if status is False and self._old_status > datetime.today():
+
+        if status is False and self._old_status > datetime.now():
             _LOGGER.debug("%s will be disconnected at %s", self.name, self._old_status)
             return True
 
